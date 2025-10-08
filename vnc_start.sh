@@ -10,25 +10,13 @@
 set -e
 
 # --- Configuration ---
-REMOTE_USER="your_username"
-REMOTE_HOST="cluster.it4i.cz" # e.g., karolina.it4i.cz or barbora.it4i.cz
-LOCAL_PORT="5901"
+
+source "$(dirname "$0")/.env"
+
+LOCAL_PORT="5961"
 VNC_GEOMETRY="1920x1080"
 STATE_FILE="/tmp/vnc_session.info"
 # --- End Configuration ---
-
-echo "Please enter your username for ${REMOTE_HOST}:"
-read -r input_user
-if [[ -n "$input_user" ]]; then
-    REMOTE_USER=$input_user
-fi
-
-echo "Please enter the cluster hostname (e.g., karolina.it4i.cz):"
-read -r input_host
-if [[ -n "$input_host" ]]; then
-    REMOTE_HOST=$input_host
-fi
-
 
 if [ -f "$STATE_FILE" ]; then
     echo "An active VNC session file already exists at ${STATE_FILE}."
