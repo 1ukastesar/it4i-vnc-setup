@@ -78,7 +78,7 @@ fi
 
 # Save session info for the cleanup script
 echo "REMOTE_USER=${REMOTE_USER}" > "${STATE_FILE}"
-echo "REMOTE_HOST=${REMOTE_HOST}" >> "${STATE_FILE}"
+echo "REMOTE_HOST=${COMPUTE_NODE}" >> "${STATE_FILE}"
 echo "DISPLAY_NUM=${DISPLAY_NUM}" >> "${STATE_FILE}"
 echo "SSH_PID=${SSH_PID}" >> "${STATE_FILE}"
 
