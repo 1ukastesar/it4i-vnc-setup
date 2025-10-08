@@ -24,6 +24,9 @@ if [ -f "$STATE_FILE" ]; then
     exit 1
 fi
 
+REMOTE_HOST="$(ssh "${REMOTE_USER}@${REMOTE_HOST}" "hostname")"
+echo "--> Found fixed hostname for this session: ${REMOTE_HOST}."
+
 echo "--> Connecting to ${REMOTE_HOST} to find a free VNC display..."
 
 # Find the first available display number between 1 and 99
