@@ -29,7 +29,7 @@ echo "--> Connecting to ${REMOTE_HOST} to find a free VNC display..."
 # Find the first available display number between 1 and 99
 DISPLAY_NUM=-1
 for i in $(seq 1 99); do
-    if ! ssh "${REMOTE_USER}@${REMOTE_HOST}" "ps aux | grep Xvnc | sed -rn 's/(\s) .*Xvnc (\:[0-9]+) .*/\1 \2/p'" | grep -q ":${i} "; then
+    if ! ssh "${REMOTE_USER}@${REMOTE_HOST}" "ps aux | grep Xvnc | sed -rn 's/(\s) .*Xvnc (\:[0-9]+) .*/\1 \2/p'" | grep -q ":${i}"; then
         DISPLAY_NUM=$i
         break
     fi
