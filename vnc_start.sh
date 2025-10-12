@@ -50,9 +50,11 @@ echo "--> Starting VNC server on ${REMOTE_HOST}..."
 # The `vncserver` command prints details, and `hostname` prints the node name.
 # We capture the last line of the output, which will be the hostname.
 COMPUTE_NODE=$(ssh "${REMOTE_USER}@${REMOTE_HOST}" "vncserver :${DISPLAY_NUM} -geometry ${VNC_GEOMETRY} && hostname")
+EXIT_CODE=${PIPESTATUS[0]}
+
 COMPUTE_NODE=$(echo "$COMPUTE_NODE" | tail -n 1)
 
-if [ -z "$COMPUTE_NODE" ]; then
+if [ -z "$COMPUTE_NODE" ] || [ $EXIT_CODE -ne 0 ]; then
     echo "Failed to start VNC server or get compute node hostname."
     exit 1
 fi
