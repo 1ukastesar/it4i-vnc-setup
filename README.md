@@ -14,6 +14,8 @@ cd it4i-vnc-setup
 cat > .env <<EOF
 REMOTE_USER=<USERNAME>
 REMOTE_HOST=barbora.it4i.cz
+# Right now, these two do not work on login2, if you find any other, just add it here
+DISPLAY_BLACKLIST=(10 11)
 EOF
 ```
 
