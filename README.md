@@ -22,7 +22,7 @@ EOF
 Just use:
 
 ```bash
-./vnc_start.sh
+./it4i-vnc start
 ```
 
 > [!IMPORTANT]
@@ -39,7 +39,7 @@ The client will ask for vncserver password you set up earlier.
 After you're done, just exit VNC client and clean up after yourself:
 
 ```bash
-./vnc_stop.sh
+./it4i-vnc stop
 ```
 
 ## Docs
