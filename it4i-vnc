@@ -27,24 +27,26 @@ start_vnc() {
 
     echo "--> Connecting to ${REMOTE_HOST} to find a free VNC display..."
 
-    # Find the first available display number between 1 and 99
+    # Find a random available display number between 1 and 99
     DISPLAY_NUM=-1
-    for i in $(seq 1 99); do
+    for i in {1..100}; do
+        RANDOM_DISPLAY=$(( ( RANDOM % 99 ) + 1 ))
+
         IS_BLACKLISTED=false
         for blocked in "${DISPLAY_BLACKLIST[@]}"; do
-            if [ "$i" -eq "$blocked" ]; then
+            if [ "$RANDOM_DISPLAY" -eq "$blocked" ]; then
                 IS_BLACKLISTED=true
                 break
             fi
         done
 
         if [ "$IS_BLACKLISTED" = true ]; then
-            echo "Skipping blacklisted display :$i..."
+            echo "Skipping blacklisted display :$RANDOM_DISPLAY..."
             continue
         fi
 
-        if ! ssh "${REMOTE_USER}@${REMOTE_HOST}" "ps aux | grep Xvnc | sed -rn 's/(\s) .*Xvnc (\:[0-9]+) .*/\1 \2/p'" | grep -q ":${i}"; then
-            DISPLAY_NUM=$i
+        if ! ssh "${REMOTE_USER}@${REMOTE_HOST}" "ps aux | grep Xvnc | sed -rn 's/(\s) .*Xvnc (\:[0-9]+) .*/\1 \2/p'" | grep -q ":${RANDOM_DISPLAY}"; then
+            DISPLAY_NUM=$RANDOM_DISPLAY
             break
         fi
     done
